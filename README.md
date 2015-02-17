@@ -1,4 +1,6 @@
-# Derby-Header (derbyjs layout with persistent header)
+# Derby-Header 
+
+Derby layout with persistent header
 
 ## Usage
 
@@ -35,7 +37,7 @@ All html in the #header-element is persistent and doesn't erase when app-routes
 are changing. You also can use components inside the #header.
 
 The package is created for client rendering. So, if you want to subscribe to 
-some data foy your header use component "create"-function. For example:
+some data for your header use component "create"-function. For example:
 
 in my index.html:
 
