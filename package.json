@@ -1,0 +1,16 @@
+{
+  "name": "derby-header",
+  "version": "1.0.0",
+  "description": "Derby layout with persistent header",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js"
+  },
+  "keywords": [
+    "derby"
+  ],
+  "dependencies": {
+  },
+  "author": "Artur Zayats <zag2art@gmail.com>",
+  "license": "MIT"
+}
