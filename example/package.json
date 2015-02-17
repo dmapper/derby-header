@@ -1,0 +1,20 @@
+{
+  "name": "derby-header-example",
+  "version": "1.0.0",
+  "description": "Derby-header example app",
+  "main": "index.js",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "keywords": [
+    "derby",
+  ],
+  "dependencies": {
+    "derby": "^0.6.0-alpha34",
+    "derby-debug": "^0.1.0",
+    "derby-header": "^1.0.0",
+    "derby-starter": "^0.2.6"
+  },
+  "author": "",
+  "license": "MIT"
+}
