@@ -56,11 +56,14 @@ if (!derby.util.isServer) {
     // Set attribute values on component model
     for (var key in context.attributes) {
       var attribute = context.attributes[key];
+
       var segments = (
-          attribute instanceof templates.ParentWrapper &&
+          typeof attribute === 'object' &&
+          attribute.type === 'ParentWrapper' &&
           attribute.expression &&
           attribute.expression.pathSegments(context)
           );
+
       if (segments) {
         model.root.ref(model._at + '.' + key, segments.join('.'));
       } else {
