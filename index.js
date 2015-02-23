@@ -124,6 +124,8 @@ if (!derby.util.isServer) {
 
       GlobalAppPage.prototype.global = true;
 
+      GlobalAppPage.prototype._setRenderPrefix = function(){};
+
       GlobalAppPage.prototype.render = function (ns) {
         this.context.pause();
         var headerFragment = this.getFragment('HeaderElement', ns);
