@@ -5,13 +5,16 @@ var components = require('derby/lib/components');
 
 var App = require('derby/lib/App');
 var Page = require('derby/lib/Page');
-var Controller = require('derby/lib//Controller');
+var Controller = require('derby/lib/Controller');
+
+var derbyTemplates = require('derby-templates');
+var templates = derbyTemplates.templates;
+var expressions = derbyTemplates.expressions;
 
 var ComponentFactory = components.ComponentFactory;
 var Component = components.Component;
 
 var Model = derby.Model;
-
 
 if (!derby.util.isServer) {
 
@@ -66,6 +69,8 @@ if (!derby.util.isServer) {
 
       if (segments) {
         model.root.ref(model._at + '.' + key, segments.join('.'));
+      } else if (attribute instanceof templates.ParentWrapper) {
+        model.set(key, expressions.renderValue(attribute, context));
       } else {
         model.set(key, attribute);
       }
