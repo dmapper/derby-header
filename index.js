@@ -68,7 +68,7 @@ if (!derby.util.isServer) {
           );
 
       if (segments) {
-        model.root.ref(model._at + '.' + key, segments.join('.'));
+        model.root.ref(model._at + '.' + key, segments.join('.'), {updateIndices: true});
       } else if (attribute instanceof templates.ParentWrapper) {
         model.set(key, expressions.renderValue(attribute, context));
       } else {
