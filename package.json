@@ -11,7 +11,7 @@
   ],
   "dependencies": {},
   "peerDependencies": {
-    "derby-templates": "^0.2.5"
+    "derby-templates": "^0.3.6"
   },
   "author": "Artur Zayats <zag2art@gmail.com>",
   "license": "MIT"
