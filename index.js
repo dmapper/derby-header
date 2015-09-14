@@ -28,11 +28,11 @@ if (!derby.util.isServer) {
     }
   };
 
-  function emitHooks(context, component) {
-    if (!context.hooks) return;
-    // Kick off hooks if view pointer specified `on` or `as` attributes
-    for (var i = 0, len = context.hooks.length; i < len; i++) {
-      context.hooks[i].emit(context, component);
+  function emitInitHooks(context, component) {
+    if (!context.initHooks) return;
+    // Run initHooks for `on` listeners immediately before init
+    for (var i = 0, len = context.initHooks.length; i < len; i++) {
+      context.initHooks[i].emit(context, component);
     }
   }
 
@@ -47,7 +47,7 @@ if (!derby.util.isServer) {
     // component's init method. This means that we don't have to rely on users
     // properly calling the Component constructor method and avoids having to
     // play nice with how CoffeeScript extends class constructors
-    emitHooks(context, component);
+    emitInitHooks(context, component);
     component.emit('init', component);
     if (component.init) component.init(model);
 
