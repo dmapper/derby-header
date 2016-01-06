@@ -18,11 +18,11 @@ var Model = derby.Model;
 
 if (!derby.util.isServer) {
 
-  Model.prototype.unloadAll = function(){
+  Model.prototype.unloadAll = function () {
 
     var contexts = this.root._contexts;
     for (var key in contexts) {
-      if (key !== 'global'){
+      if (key !== 'global') {
         contexts[key].unload();
       }
     }
@@ -63,7 +63,7 @@ if (!derby.util.isServer) {
           attribute instanceof templates.ParentWrapper &&
           attribute.expression &&
           attribute.expression.pathSegments(context)
-          );
+      );
       if (segments) {
         model.root.ref(model._at + '.' + key, segments.join('.'), {updateIndices: true});
       } else {
@@ -72,7 +72,7 @@ if (!derby.util.isServer) {
     }
   }
 
-  ComponentFactory.prototype.init = function(context){
+  ComponentFactory.prototype.init = function (context) {
     var global = context.controller.page.global;
 
     var component = new this.constructor();
@@ -124,7 +124,8 @@ if (!derby.util.isServer) {
 
       GlobalAppPage.prototype.global = true;
 
-      GlobalAppPage.prototype._setRenderPrefix = function(){};
+      GlobalAppPage.prototype._setRenderPrefix = function () {
+      };
 
       GlobalAppPage.prototype.render = function (ns) {
         this.context.pause();
@@ -134,7 +135,7 @@ if (!derby.util.isServer) {
         this.context.unpause();
       };
 
-      GlobalAppPage.prototype.destroy = function() {
+      GlobalAppPage.prototype.destroy = function () {
         this.emit('destroy');
         this._removeModelListeners();
         for (var id in this._components) {
@@ -149,7 +150,6 @@ if (!derby.util.isServer) {
         // Unfetch and unsubscribe from all queries and documents
         silentModel.unloadAll && silentModel.unloadAll();
       };
-
 
 
       return GlobalAppPage;
@@ -186,75 +186,44 @@ if (!derby.util.isServer) {
     if (this.create) this.create(this.model, this.dom);
     this.context.unpause();
   };
+}
 
+// Custom layout with <div id="header"> and <div id="body">
+if (!App.prototype.__patchedDerbyHeader) {
+  App.prototype._loadBaseViews = function () {
+    this.views.register('Page',
+            '<!DOCTYPE html>' +
+            '<meta charset="utf-8">' +
+            '<view name="{{$render.prefix}}TitleElement"></view>' +
+            '<view name="{{$render.prefix}}Styles"></view>' +
+            '<view name="{{$render.prefix}}Head"></view>' +
+            '<body>' +
+            '<view name="HeaderElement"></view>' +
+            '<view name="{{$render.prefix}}BodyElement"></view>',
+        {serverOnly: true}
+    );
+    this.views.register('TitleElement',
+        '<title><view name="{{$render.prefix}}Title"></view></title>'
+    );
 
-} else {
-  var fs = derby.util.serverRequire(module, 'fs');
-  var path = derby.util.serverRequire(module, 'path');
-  var files = derby.util.serverRequire(module, 'derby/lib/files');
+    this.views.register('HeaderElement',
+            '<div id="header">' +
+            '<view name="Header"></view>' +
+            '</div>'
+    );
 
-  var STYLE_EXTENSIONS = ['.css'];
-  var VIEW_EXTENSIONS = ['.html'];
-  var COMPILERS = {
-    '.css': files.cssCompiler, '.html': files.htmlCompiler
+    this.views.register('BodyElement',
+            '<div id="body" class="{{$bodyClass($render.ns)}}">' +
+            '<view name="{{$render.prefix}}Body"></view>' +
+            '</div>'
+    );
+    this.views.register('Title', 'Derby App');
+    this.views.register('Styles', '', {serverOnly: true});
+    this.views.register('Head', '', {serverOnly: true});
+    this.views.register('Header', '');
+    this.views.register('Body', '');
+    this.views.register('Tail', '');
   };
 
-
-  if (!App.prototype.__putched) {
-    App.prototype._init = function () {
-      this.scriptFilename = null;
-      this.scriptMapFilename = null;
-      this.scriptUrl = null;
-      this.scriptMapUrl = null;
-      this.clients = null;
-      this.styleExtensions = STYLE_EXTENSIONS.slice();
-      this.viewExtensions = VIEW_EXTENSIONS.slice();
-      this.compilers = util.copyObject(COMPILERS);
-
-      this.serializedDir = path.dirname(this.filename) + '/derby-serialized';
-      this.serializedBase = this.serializedDir + '/' + this.name;
-      if (fs.existsSync(this.serializedBase + '.json')) {
-        this.deserialize();
-        this.loadViews = function () {
-        };
-        this.loadStyles = function () {
-        };
-        return;
-      }
-      this.views.register('Page',
-              '<!DOCTYPE html>' +
-              '<meta charset="utf-8">' +
-              '<view name="{{$render.prefix}}TitleElement"></view>' +
-              '<view name="{{$render.prefix}}Styles"></view>' +
-              '<view name="{{$render.prefix}}Head"></view>' +
-              '<body>' +
-              '<view name="HeaderElement"></view>' +
-              '<view name="{{$render.prefix}}BodyElement"></view>',
-          {serverOnly: true}
-      );
-      this.views.register('TitleElement',
-          '<title><view name="{{$render.prefix}}Title"></view></title>'
-      );
-
-      this.views.register('HeaderElement',
-              '<div id="header">' +
-              '<view name="Header"></view>' +
-              '</div>'
-      );
-
-      this.views.register('BodyElement',
-              '<div id="body" class="{{$bodyClass($render.ns)}}">' +
-              '<view name="{{$render.prefix}}Body"></view>' +
-              '</div>'
-      );
-      this.views.register('Title', 'Derby App');
-      this.views.register('Styles', '', {serverOnly: true});
-      this.views.register('Head', '', {serverOnly: true});
-      this.views.register('Header', '');
-      this.views.register('Body', '');
-      this.views.register('Tail', '');
-    };
-
-    App.prototype.__putched = true;
-  }
+  App.prototype.__patchedDerbyHeader = true;
 }
