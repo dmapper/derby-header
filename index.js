@@ -245,9 +245,13 @@ function setAttribute(key, attribute, component, context, model){
     model.root.ref(model._at + '.' + key, segments.join('.'), {updateIndices: true});
   } else {
     if (attribute instanceof templates.ParentWrapper) {
-      component._attributeList = component._attributeList || [];
-      component._attributeList.push(key);
-      model.set(key, util.deepCopy(attribute.get(context)));
+      if (attribute.isPartial){
+        model.set(key, attribute);
+      } else {
+        component._attributeList = component._attributeList || [];
+        component._attributeList.push(key);
+        model.set(key, util.deepCopy(attribute.get(context)));
+      }
     } else {
       model.set(key, attribute);
     }
