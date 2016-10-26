@@ -480,27 +480,27 @@ if (!App.prototype.__patchedDerbyHeader) {
     this.views.register('Page',
             '<!DOCTYPE html>' +
             '<meta charset="utf-8">' +
-            '<view name="{{$render.prefix}}TitleElement"></view>' +
-            '<view name="{{$render.prefix}}Styles"></view>' +
-            '<view name="{{$render.prefix}}Head"></view>' +
+            '<view is="{{$render.prefix}}TitleElement"></view>' +
+            '<view is="{{$render.prefix}}Styles"></view>' +
+            '<view is="{{$render.prefix}}Head"></view>' +
             '<body>' +
-            '<view name="HeaderElement"></view>' +
-            '<view name="{{$render.prefix}}BodyElement"></view>',
+            '<view is="HeaderElement"></view>' +
+            '<view is="{{$render.prefix}}BodyElement"></view>',
         {serverOnly: true}
     );
     this.views.register('TitleElement',
-        '<title><view name="{{$render.prefix}}Title"></view></title>'
+        '<title><view is="{{$render.prefix}}Title"></view></title>'
     );
 
     this.views.register('HeaderElement',
             '<div id="header">' +
-            '<view name="Header"></view>' +
+            '<view is="Header"></view>' +
             '</div>'
     );
 
     this.views.register('BodyElement',
             '<div id="body" class="{{$bodyClass($render.ns)}}">' +
-            '<view name="{{$render.prefix}}Body"></view>' +
+            '<view is="{{$render.prefix}}Body"></view>' +
             '</div>'
     );
     this.views.register('Title', 'Derby App');
