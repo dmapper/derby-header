@@ -301,6 +301,7 @@ function setAttributesObjectValue(attributes, component, context, model) {
       }
     // Const
     } else {
+      var value = attributes;
       attributesMeta.type = 'literal';
 
       if (isPlainObject(value)) {
