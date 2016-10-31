@@ -1,6 +1,6 @@
 {
   "name": "derby-header",
-  "version": "4.2.1",
+  "version": "4.2.2",
   "description": "Derby layout with persistent header",
   "main": "index.js",
   "scripts": {
