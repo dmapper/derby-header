@@ -457,26 +457,6 @@ if (!derby.util.isServer) {
 
 // Custom layout with <div id="header"> and <div id="body">
 if (!App.prototype.__patchedDerbyHeader) {
-  ComponentFactory.prototype.init = function(context){
-    var component = new this.constructor();
-
-    var parent = context.controller;
-    var id = context.id();
-    var scope = ['$components', id];
-
-    var model = parent.model.root.eventContext(component);
-    model._at = scope.join('.');
-    model.set('id', id);
-    setAttributes(component, context, model);
-    // Store a reference to the component's scope such that the expression
-    // getters are relative to the component
-    model.data = model.get();
-
-    parent.page._components[id] = component;
-
-    return initComponent(context, component, parent, model, id, scope);
-  };
-
   App.prototype._loadBaseViews = function () {
     this.views.register('Page',
             '<!DOCTYPE html>' +
