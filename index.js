@@ -250,7 +250,7 @@ function setAttribute(key, attribute, component, context, model){
       } else {
         component._attributeList = component._attributeList || [];
         component._attributeList.push(key);
-        model.set(key, util.deepCopy(attribute.get(context)));
+        model.set(key, util.deepCopy(attribute.get(context, true)));
       }
     } else {
       model.set(key, attribute);
@@ -268,7 +268,7 @@ function setAttributesObjectValue(attributes, component, context, model) {
   if (segments) {
     attributesMeta.type = 'ref';
     attributesMeta.segments = segments;
-    var value = attributes.get(context);
+    var value = attributes.get(context, true);
     if (!isPlainObject(value)) {
       refAttribute(model, 'attributes', segments.join('.'));
       attributesMeta.oldValueIsObject = false;
@@ -285,7 +285,7 @@ function setAttributesObjectValue(attributes, component, context, model) {
     // Expr
     if (attributes instanceof templates.ParentWrapper) {
       attributesMeta.type = 'expression';
-      var value = attributes.get(context);
+      var value = attributes.get(context, true);
       if (!isPlainObject(value)) {
         model.set('attributes', util.deepCopy(value));
         attributesMeta.oldValueIsObject = false;
