@@ -460,10 +460,13 @@ if (!App.prototype.__patchedDerbyHeader) {
   App.prototype._loadBaseViews = function () {
     this.views.register('Page',
             '<!DOCTYPE html>' +
+            '<html lang="en">' +
+            '<head>' +
             '<meta charset="utf-8">' +
             '<view is="{{$render.prefix}}TitleElement"></view>' +
             '<view is="{{$render.prefix}}Styles"></view>' +
             '<view is="{{$render.prefix}}Head"></view>' +
+            '</head>' +
             '<body>' +
             '<view is="HeaderElement"></view>' +
             '<view is="{{$render.prefix}}BodyElement"></view>',
