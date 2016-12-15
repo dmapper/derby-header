@@ -36,9 +36,13 @@ function bindIndividualAttributes(context, node){
     var comonentAttribute = new ComponentAttribute(context.controller, key, attribute);
     comonentAttribute.getBound(parentContext, node);
     component.model.on('change', key, function(value, oldValue){
+      if (key === 'id') return;
       if (!attribute.expression) return;
+      if (!attribute.expression.set) return;
       if (value !== oldValue) {
-        attribute.expression.set(context, value);
+        try {
+          attribute.expression.set(context, value);
+        } catch(err) {}
       }
     });
   })
