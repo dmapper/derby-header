@@ -39,7 +39,7 @@ function bindIndividualAttributes(context, node){
       if (key === 'id') return;
       if (!attribute.expression) return;
       if (!attribute.expression.set) return;
-      if (value !== oldValue) {
+      if (!util.deepEqual(value, oldValue)) {
         try {
           attribute.expression.set(context, value);
         } catch(err) {}
