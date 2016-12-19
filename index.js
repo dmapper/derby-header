@@ -250,6 +250,7 @@ function setAttributes(component, context, model) {
 }
 
 function setAttribute(key, attribute, component, context, model){
+  model = model.silent();
   var segments = getSegments(attribute, context);
   if (segments) {
     model.root.ref(model._at + '.' + key, segments.join('.'), {updateIndices: true});
