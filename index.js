@@ -473,7 +473,7 @@ if (!App.prototype.__patchedDerbyHeader) {
         {serverOnly: true}
     );
     this.views.register('TitleElement',
-        '<title>{{_session.title}}</title>'
+        '<title>{{_page.title}}</title>'
     );
 
     this.views.register('HeaderElement',
