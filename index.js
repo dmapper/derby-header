@@ -473,7 +473,7 @@ if (!App.prototype.__patchedDerbyHeader) {
         {serverOnly: true}
     );
     this.views.register('TitleElement',
-        '<title><view is="{{$render.prefix}}Title"></view></title>'
+        '<title>{{_session.title}}</title>'
     );
 
     this.views.register('HeaderElement',
