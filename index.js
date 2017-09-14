@@ -387,7 +387,7 @@ if (!derby.util.isServer) {
 
   App.prototype.createGlobalPage = function () {
 
-    if (this.page) {
+    if (this.page && this.globalPage) {
       this.emit('destroyGlobalPage', this.globalPage);
       this.globalPage.destroy();
     }
