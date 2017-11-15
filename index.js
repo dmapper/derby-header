@@ -480,6 +480,17 @@ if (!App.prototype.__patchedDerbyHeader) {
             '<view is="{{$render.prefix}}BodyElement"></view>',
         {serverOnly: true}
     );
+    this.views.register('BootstrapPage',
+            '<!DOCTYPE html>' +
+            '<meta charset="utf-8">' +
+            '<view is="{{$render.prefix}}TitleElement"></view>' +
+            '<view is="{{$render.prefix}}Styles"></view>' +
+            '<view is="{{$render.prefix}}Head"></view>' +
+            '<body>' +
+            '<div id="header"></div>' +
+            '<div id="body"><div id="BootstrapLoading"></div></div>',
+        {serverOnly: true}
+    );
     this.views.register('TitleElement',
         '<title><view is="{{$render.prefix}}Title"></view></title>'
     );
