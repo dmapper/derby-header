@@ -484,6 +484,7 @@ if (!App.prototype.__patchedDerbyHeader) {
             '<!DOCTYPE html>' +
             '<meta charset="utf-8">' +
             '<view is="{{$render.prefix}}TitleElement"></view>' +
+            '<view is="BootstrapStyles"></view>' +
             '<view is="{{$render.prefix}}Styles"></view>' +
             '<view is="{{$render.prefix}}Head"></view>' +
             '<body>' +
@@ -507,6 +508,12 @@ if (!App.prototype.__patchedDerbyHeader) {
             '</div>'
     );
     this.views.register('Title', 'Derby App');
+    this.views.register('BootstrapStyles',
+      '<style>' +
+      '#BootstrapLoading::before { content: "Loading...", padding: 20px }' +
+      '</style>',
+      {serverOnly: true}
+    );
     this.views.register('Styles', '', {serverOnly: true});
     this.views.register('Head', '', {serverOnly: true});
     this.views.register('Header', '');
