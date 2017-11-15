@@ -510,7 +510,7 @@ if (!App.prototype.__patchedDerbyHeader) {
     this.views.register('Title', 'Derby App');
     this.views.register('BootstrapStyles',
       '<style>' +
-      '#BootstrapLoading::before { content: "Loading...", padding: 20px }' +
+      '#BootstrapLoading::before { content: "Loading..."; padding: 20px }' +
       '</style>',
       {serverOnly: true}
     );
