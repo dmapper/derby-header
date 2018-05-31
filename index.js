@@ -468,6 +468,10 @@ if (!derby.util.isServer) {
 
 // Custom layout with <div id="header"> and <div id="body">
 if (!App.prototype.__patchedDerbyHeader) {
+  Page.prototype.$bodyClass = function(path) {
+    return path.replace(':', '-');
+  }
+
   App.prototype._loadBaseViews = function () {
     this.views.register('Page',
             '<!DOCTYPE html>' +
