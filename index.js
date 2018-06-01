@@ -507,7 +507,7 @@ if (!App.prototype.__patchedDerbyHeader) {
     );
 
     this.views.register('BodyElement',
-            '<div id="body" class="page-{{$bodyClass($render.ns)}}">' +
+            '<div id="body" class="-page-{{$bodyClass($render.ns)}}">' +
             '<view is="{{$render.prefix}}Body"></view>' +
             '</div>'
     );
