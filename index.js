@@ -469,7 +469,7 @@ if (!derby.util.isServer) {
 // Custom layout with <div id="header"> and <div id="body">
 if (!App.prototype.__patchedDerbyHeader) {
   Page.prototype.$bodyClass = function(path) {
-    return path.replace(':', '-');
+    return path.replace(/:/g, '-');
   }
 
   App.prototype._loadBaseViews = function () {
@@ -507,7 +507,7 @@ if (!App.prototype.__patchedDerbyHeader) {
     );
 
     this.views.register('BodyElement',
-            '<div id="body" class="-{{$bodyClass($render.ns)}}">' +
+            '<div id="body" class="page-{{$bodyClass($render.ns)}}">' +
             '<view is="{{$render.prefix}}Body"></view>' +
             '</div>'
     );
