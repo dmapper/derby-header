@@ -475,7 +475,8 @@ if (!App.prototype.__patchedDerbyHeader) {
   App.prototype._loadBaseViews = function () {
     this.views.register('Page',
             '<!DOCTYPE html>' +
-            '<meta charset="utf-8">' +
+            '<html lang="en-US">' +
+            '<meta http-equiv="Content-Type" content="text/html;charset=UTF-8">' +
             '<view is="{{$render.prefix}}TitleElement"></view>' +
             '<view is="{{$render.prefix}}Styles"></view>' +
             '<view is="{{$render.prefix}}Head"></view>' +
@@ -486,7 +487,8 @@ if (!App.prototype.__patchedDerbyHeader) {
     );
     this.views.register('BootstrapPage',
             '<!DOCTYPE html>' +
-            '<meta charset="utf-8">' +
+            '<html lang="en-US">' +
+            '<meta http-equiv="Content-Type" content="text/html;charset=UTF-8">' +
             '<view is="{{$render.prefix}}TitleElement"></view>' +
             '<view is="BootstrapStyles"></view>' +
             '<view is="{{$render.prefix}}Styles"></view>' +
